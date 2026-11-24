@@ -1,0 +1,34 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/lost_found_db}
+    username: ${DB_USERNAME:lostfound}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 5
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+
+app:
+  storage:
+    endpoint: ${STORAGE_ENDPOINT:http://localhost:3900}
+    region: ${STORAGE_REGION:us-east-1}
+    path-style-access: ${STORAGE_PATH_STYLE:true}
+    access-key: ${STORAGE_ACCESS_KEY}
+    secret-key: ${STORAGE_SECRET_KEY}
+    bucket: ${STORAGE_BUCKET:lost-found-images}
+
+logging:
+  level:
+    com.example.lostfound: DEBUG
+    org.hibernate.SQL: DEBUG
